@@ -3,7 +3,7 @@ package com.ebay.calculator;
 import com.ebay.calculator.controller.CalculatorController;
 import com.ebay.calculator.model.Operation;
 import com.ebay.calculator.service.CalculatorService;
-import com.ebay.calculator.model.ExpressionInput;
+import com.ebay.calculator.model.CalculationInput;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Before;
 import org.junit.Test;
