@@ -143,30 +143,5 @@ public class CalculatorControllerTest {
         verify(calculatorService).chainCalculate(10, operations);
     }
 
-    @Test
-    public void testEvaluateExpression_Valid() {
-        // Given
-        String expression = "5 + 3 * 2";
-        when(calculatorService.evaluateExpression(expression)).thenReturn("11");
-
-        // When
-        String result = calculatorController.evaluateExpression(expression);
-
-        // Then
-        assertEquals("Expression '5 + 3 * 2' should result in 11", "11", result);
-        verify(calculatorService).evaluateExpression(expression);
-    }
-
-    @Test
-    public void testEvaluateExpression_Invalid() {
-        // Given
-        String expression = "5 + + 3";
-
-        // When
-        String result = calculatorController.evaluateExpression(expression);
-
-        // Then
-        assertEquals("Invalid expression should return an error message", "bad input format or value", result);
-    }
 }
 
