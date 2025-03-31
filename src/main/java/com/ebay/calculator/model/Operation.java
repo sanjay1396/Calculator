@@ -9,7 +9,7 @@ public enum Operation {
     SUBTRACT("-", 1),         // Subtraction operation, same priority as addition
     MULTIPLY("*", 2),         // Multiplication operation, higher priority than add/subtract
     DIVIDE("/", 2),           // Division operation, same priority as multiplication
-    POWER("^", 3),            // Exponentiation, high priority
+    POWER("^", 3);            // Exponentiation, high priority
 
     private final String symbol;
     private final int priority;
