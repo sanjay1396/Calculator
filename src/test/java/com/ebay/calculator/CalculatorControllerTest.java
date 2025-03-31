@@ -3,21 +3,19 @@ package com.ebay.calculator;
 import com.ebay.calculator.controller.CalculatorController;
 import com.ebay.calculator.model.Operation;
 import com.ebay.calculator.service.CalculatorService;
-import com.ebay.calculator.dto.CalculationInput;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.ResponseEntity;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class CalculatorControllerTest {
 
@@ -38,11 +36,10 @@ public class CalculatorControllerTest {
         when(calculatorService.calculate(Operation.ADD, 5, 3)).thenReturn(8);
 
         // When
-        ResponseEntity<Number> response = calculatorController.calculate(Operation.ADD, "5", "3");
+        Number result = calculatorController.calculate(Operation.ADD, 5, 3);
 
         // Then
-        assertNotNull(response.getBody());
-        assertEquals(8, response.getBody().intValue());
+        assertEquals("Addition should return 8", 8, result.intValue());
         verify(calculatorService).calculate(Operation.ADD, 5, 3);
     }
 
@@ -52,11 +49,10 @@ public class CalculatorControllerTest {
         when(calculatorService.calculate(Operation.SUBTRACT, 5, 3)).thenReturn(2);
 
         // When
-        ResponseEntity<Number> response = calculatorController.calculate(Operation.SUBTRACT, "5", "3");
+        Number result = calculatorController.calculate(Operation.SUBTRACT, 5, 3);
 
         // Then
-        assertNotNull(response.getBody());
-        assertEquals(2, response.getBody().intValue());
+        assertEquals("Subtraction should return 2", 2, result.intValue());
         verify(calculatorService).calculate(Operation.SUBTRACT, 5, 3);
     }
 
@@ -66,11 +62,10 @@ public class CalculatorControllerTest {
         when(calculatorService.calculate(Operation.MULTIPLY, 5, 3)).thenReturn(15);
 
         // When
-        ResponseEntity<Number> response = calculatorController.calculate(Operation.MULTIPLY, "5", "3");
+        Number result = calculatorController.calculate(Operation.MULTIPLY, 5, 3);
 
         // Then
-        assertNotNull(response.getBody());
-        assertEquals(15, response.getBody().intValue());
+        assertEquals("Multiplication should return 15", 15, result.intValue());
         verify(calculatorService).calculate(Operation.MULTIPLY, 5, 3);
     }
 
@@ -80,11 +75,10 @@ public class CalculatorControllerTest {
         when(calculatorService.calculate(Operation.DIVIDE, 6, 3)).thenReturn(2);
 
         // When
-        ResponseEntity<Number> response = calculatorController.calculate(Operation.DIVIDE, "6", "3");
+        Number result = calculatorController.calculate(Operation.DIVIDE, 6, 3);
 
         // Then
-        assertNotNull(response.getBody());
-        assertEquals(2, response.getBody().intValue());
+        assertEquals("Division should return 2", 2, result.intValue());
         verify(calculatorService).calculate(Operation.DIVIDE, 6, 3);
     }
 
@@ -94,9 +88,9 @@ public class CalculatorControllerTest {
         when(calculatorService.calculate(Operation.DIVIDE, 5, 0)).thenThrow(new IllegalArgumentException("Cannot divide by zero"));
 
         // When & Then
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> 
-            calculatorController.calculate(Operation.DIVIDE, "5", "0")
-        );
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            calculatorController.calculate(Operation.DIVIDE, 5, 0);
+        });
         assertEquals("Cannot divide by zero", exception.getMessage());
         verify(calculatorService).calculate(Operation.DIVIDE, 5, 0);
     }
@@ -111,11 +105,10 @@ public class CalculatorControllerTest {
         when(calculatorService.chainCalculate(5, operations)).thenReturn(16);
 
         // When
-        ResponseEntity<Number> response = calculatorController.chainCalculate("5", operations);
+        Number result = calculatorController.chainCalculate(5, operations);
 
         // Then
-        assertNotNull(response.getBody());
-        assertEquals(16, response.getBody().intValue());
+        assertEquals("Chained operations should result in 16", 16, result.intValue());
         verify(calculatorService).chainCalculate(5, operations);
     }
 
@@ -129,26 +122,24 @@ public class CalculatorControllerTest {
         when(calculatorService.chainCalculate(10, operations)).thenReturn(12);
 
         // When
-        ResponseEntity<Number> response = calculatorController.chainCalculate("10", operations);
+        Number result = calculatorController.chainCalculate(10, operations);
 
         // Then
-        assertNotNull(response.getBody());
-        assertEquals(12, response.getBody().intValue());
+        assertEquals("Chained subtraction and addition should result in 12", 12, result.intValue());
         verify(calculatorService).chainCalculate(10, operations);
     }
 
     @Test
     public void testChainCalculate_EmptyOperations() {
         // Given
-        List<Pair<Operation, Number>> operations = Collections.emptyList();
+        List<Pair<Operation, Number>> operations = Arrays.asList();  // No operations
         when(calculatorService.chainCalculate(10, operations)).thenReturn(10);
 
         // When
-        ResponseEntity<Number> response = calculatorController.chainCalculate("10", operations);
+        Number result = calculatorController.chainCalculate(10, operations);
 
         // Then
-        assertNotNull(response.getBody());
-        assertEquals(10, response.getBody().intValue());
+        assertEquals("Chaining with no operations should return the initial value", 10, result.intValue());
         verify(calculatorService).chainCalculate(10, operations);
     }
 
@@ -156,15 +147,13 @@ public class CalculatorControllerTest {
     public void testEvaluateExpression_Valid() {
         // Given
         String expression = "5 + 3 * 2";
-        CalculationInput input = new CalculationInput(expression);
         when(calculatorService.evaluateExpression(expression)).thenReturn("11");
 
         // When
-        ResponseEntity<String> response = calculatorController.evaluateExpression(input);
+        String result = calculatorController.evaluateExpression(expression);
 
         // Then
-        assertNotNull(response.getBody());
-        assertEquals("11", response.getBody());
+        assertEquals("Expression '5 + 3 * 2' should result in 11", "11", result);
         verify(calculatorService).evaluateExpression(expression);
     }
 
@@ -172,14 +161,12 @@ public class CalculatorControllerTest {
     public void testEvaluateExpression_Invalid() {
         // Given
         String expression = "5 + + 3";
-        CalculationInput input = new CalculationInput(expression);
 
         // When
-        ResponseEntity<String> response = calculatorController.evaluateExpression(input);
+        String result = calculatorController.evaluateExpression(expression);
 
         // Then
-        assertNotNull(response.getBody());
-        assertEquals("bad input format or value", response.getBody());
+        assertEquals("Invalid expression should return an error message", "bad input format or value", result);
     }
 }
 
