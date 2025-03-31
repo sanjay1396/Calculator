@@ -36,7 +36,7 @@ public class CalculatorControllerTest {
         when(calculatorService.calculate(Operation.ADD, 5, 3)).thenReturn(8);
 
         // When
-        Number result = calculatorController.calculate(Operation.ADD, 5, 3);
+        Number result = calculatorController.calculate(Operation.ADD, 5, 3).getBody();
 
         // Then
         assertEquals("Addition should return 8", 8, result.intValue());
@@ -49,7 +49,7 @@ public class CalculatorControllerTest {
         when(calculatorService.calculate(Operation.SUBTRACT, 5, 3)).thenReturn(2);
 
         // When
-        Number result = calculatorController.calculate(Operation.SUBTRACT, 5, 3);
+        Number result = calculatorController.calculate(Operation.SUBTRACT, 5, 3).getBody();
 
         // Then
         assertEquals("Subtraction should return 2", 2, result);
@@ -62,7 +62,7 @@ public class CalculatorControllerTest {
         when(calculatorService.calculate(Operation.MULTIPLY, 5, 3)).thenReturn(15);
 
         // When
-        Number result = calculatorController.calculate(Operation.MULTIPLY, 5, 3);
+        Number result = calculatorController.calculate(Operation.MULTIPLY, 5, 3).getBody();
 
         // Then
         assertEquals("Multiplication should return 15", 15, result);
@@ -75,7 +75,7 @@ public class CalculatorControllerTest {
         when(calculatorService.calculate(Operation.DIVIDE, 6, 3)).thenReturn(2);
 
         // When
-        Number result = calculatorController.calculate(Operation.DIVIDE, 6, 3);
+        Number result = calculatorController.calculate(Operation.DIVIDE, 6, 3).getBody();
 
         // Then
         assertEquals("Division should return 2", 2, result);
@@ -105,7 +105,7 @@ public class CalculatorControllerTest {
         when(calculatorService.chainCalculate(5, operations)).thenReturn(16);
 
         // When
-        Number result = calculatorController.chainCalculate(5, operations);
+        Number result = calculatorController.chainCalculate(5, operations).getBody();
 
         // Then
         assertEquals("Chained operations should result in 16", 16, result);
@@ -122,7 +122,7 @@ public class CalculatorControllerTest {
         when(calculatorService.chainCalculate(10, operations)).thenReturn(12);
 
         // When
-        Number result = calculatorController.chainCalculate(10, operations);
+        Number result = calculatorController.chainCalculate(10, operations).getBody();
 
         // Then
         assertEquals("Chained subtraction and addition should result in 12", 12, result);
@@ -136,7 +136,7 @@ public class CalculatorControllerTest {
         when(calculatorService.chainCalculate(10, operations)).thenReturn(10);
 
         // When
-        Number result = calculatorController.chainCalculate(10, operations);
+        Number result = calculatorController.chainCalculate(10, operations).getBody();
 
         // Then
         assertEquals("Chaining with no operations should return the initial value", 10, result);
