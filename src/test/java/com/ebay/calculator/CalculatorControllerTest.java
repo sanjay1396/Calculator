@@ -39,7 +39,7 @@ public class CalculatorControllerTest {
         Number result = calculatorController.calculate(Operation.ADD, 5, 3);
 
         // Then
-        assertEquals("Addition should return 8", 8, result);
+        assertEquals("Addition should return 8", 8, result.intValue());
         verify(calculatorService).calculate(Operation.ADD, 5, 3);
     }
 
