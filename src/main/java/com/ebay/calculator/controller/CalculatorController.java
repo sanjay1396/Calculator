@@ -35,7 +35,7 @@ public class CalculatorController {
             return ResponseEntity.ok(result);
         } catch (Exception e) {
             logger.error("Error occurred during calculation: {}", e.getMessage());
-            return ResponseEntity.badRequest().body("Error processing the calculation");
+            return ResponseEntity.badRequest().body(0);
         }
     }
 
