@@ -39,7 +39,7 @@ public class CalculatorControllerTest {
         Number result = calculatorController.calculate(Operation.ADD, 5, 3);
 
         // Then
-        assertEquals("Addition should return 8", 8, result.intValue());
+        assertEquals("Addition should return 8", 8, result);
         verify(calculatorService).calculate(Operation.ADD, 5, 3);
     }
 
@@ -52,7 +52,7 @@ public class CalculatorControllerTest {
         Number result = calculatorController.calculate(Operation.SUBTRACT, 5, 3);
 
         // Then
-        assertEquals("Subtraction should return 2", 2, result.intValue());
+        assertEquals("Subtraction should return 2", 2, result);
         verify(calculatorService).calculate(Operation.SUBTRACT, 5, 3);
     }
 
@@ -65,7 +65,7 @@ public class CalculatorControllerTest {
         Number result = calculatorController.calculate(Operation.MULTIPLY, 5, 3);
 
         // Then
-        assertEquals("Multiplication should return 15", 15, result.intValue());
+        assertEquals("Multiplication should return 15", 15, result);
         verify(calculatorService).calculate(Operation.MULTIPLY, 5, 3);
     }
 
@@ -78,7 +78,7 @@ public class CalculatorControllerTest {
         Number result = calculatorController.calculate(Operation.DIVIDE, 6, 3);
 
         // Then
-        assertEquals("Division should return 2", 2, result.intValue());
+        assertEquals("Division should return 2", 2, result);
         verify(calculatorService).calculate(Operation.DIVIDE, 6, 3);
     }
 
@@ -108,7 +108,7 @@ public class CalculatorControllerTest {
         Number result = calculatorController.chainCalculate(5, operations);
 
         // Then
-        assertEquals("Chained operations should result in 16", 16, result.intValue());
+        assertEquals("Chained operations should result in 16", 16, result);
         verify(calculatorService).chainCalculate(5, operations);
     }
 
@@ -125,7 +125,7 @@ public class CalculatorControllerTest {
         Number result = calculatorController.chainCalculate(10, operations);
 
         // Then
-        assertEquals("Chained subtraction and addition should result in 12", 12, result.intValue());
+        assertEquals("Chained subtraction and addition should result in 12", 12, result);
         verify(calculatorService).chainCalculate(10, operations);
     }
 
@@ -139,7 +139,7 @@ public class CalculatorControllerTest {
         Number result = calculatorController.chainCalculate(10, operations);
 
         // Then
-        assertEquals("Chaining with no operations should return the initial value", 10, result.intValue());
+        assertEquals("Chaining with no operations should return the initial value", 10, result);
         verify(calculatorService).chainCalculate(10, operations);
     }
 
