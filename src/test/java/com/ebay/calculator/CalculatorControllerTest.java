@@ -36,7 +36,7 @@ public class CalculatorControllerTest {
         when(calculatorService.calculate(Operation.ADD, 5, 3)).thenReturn(8);
 
         // When
-        Number result = calculatorController.calculate(Operation.ADD, 5, 3).toString();
+        Number result = calculatorController.calculate(Operation.ADD, 5, 3);
 
         // Then
         assertEquals("Addition should return 8", 8, result);
