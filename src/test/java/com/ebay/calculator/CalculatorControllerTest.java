@@ -156,7 +156,7 @@ public class CalculatorControllerTest {
     public void testEvaluateExpression_Valid() {
         // Given
         String expression = "5 + 3 * 2";
-        ExpressionInput input = new ExpressionInput(expression);
+        CalculationInput input = new CalculationInput(expression);
         when(calculatorService.evaluateExpression(expression)).thenReturn("11");
 
         // When
@@ -172,7 +172,7 @@ public class CalculatorControllerTest {
     public void testEvaluateExpression_Invalid() {
         // Given
         String expression = "5 + + 3";
-        ExpressionInput input = new ExpressionInput(expression);
+        CalculationInput input = new CalculationInput(expression);
 
         // When
         ResponseEntity<String> response = calculatorController.evaluateExpression(input);
