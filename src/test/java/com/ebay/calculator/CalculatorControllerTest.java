@@ -49,7 +49,7 @@ public class CalculatorControllerTest {
         when(calculatorService.calculate(Operation.SUBTRACT, 5, 3)).thenReturn(2);
 
         // When
-        Number result = calculatorController.calculate(Operation.SUBTRACT, 5, 3).toString();
+        Number result = calculatorController.calculate(Operation.SUBTRACT, 5, 3);
 
         // Then
         assertEquals("Subtraction should return 2", 2, result);
@@ -62,7 +62,7 @@ public class CalculatorControllerTest {
         when(calculatorService.calculate(Operation.MULTIPLY, 5, 3)).thenReturn(15);
 
         // When
-        Number result = calculatorController.calculate(Operation.MULTIPLY, 5, 3).toString();
+        Number result = calculatorController.calculate(Operation.MULTIPLY, 5, 3);
 
         // Then
         assertEquals("Multiplication should return 15", 15, result);
@@ -75,7 +75,7 @@ public class CalculatorControllerTest {
         when(calculatorService.calculate(Operation.DIVIDE, 6, 3)).thenReturn(2);
 
         // When
-        Number result = calculatorController.calculate(Operation.DIVIDE, 6, 3).toString();
+        Number result = calculatorController.calculate(Operation.DIVIDE, 6, 3);
 
         // Then
         assertEquals("Division should return 2", 2, result);
